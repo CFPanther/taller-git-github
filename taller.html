@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Taller</title>
+  </head>
+  <body>
+    <script type="module">
+      import * as THREE from "https://threejsfundamentals.org/threejs/resources/threejs/r119/build/three.module.js";
+      import { OrbitControls } from "https://threejsfundamentals.org/threejs/resources/threejs/r119/examples/jsm/controls/OrbitControls.js";
+      import { GUI } from "https://lizgarz.github.io/THREE/dat.gui.module.js";
+      var renderer;
+      var scene;
+      var camera;
+
+      init();
+
+      function init() {
+        // Creación escena
+
+        scene = new THREE.Scene();
+
+        // Crear camera
+
+        camera = new THREE.PerspectiveCamera(
+          60,
+          window.innerWidth / window.innerHeight,
+          0.1,
+          1000
+        );
+
+        renderer = new THREE.WebGLRenderer();
+        renderer.setClearColor(0x000000, 1.0);
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        renderer.setClearColor(0x000000, 1);
+
+        document.body.appendChild(renderer.domElement);
+
+        var cubeGeometry = new THREE.BoxGeometry(2, 2, 2);
+        var cubeMaterial = new THREE.MeshNormalMaterial({ color: 0xffffff });
+
+        var cube = new THREE.Mesh(cubeGeometry, cubeMaterial);
+        scene.add(cube);
+
+        
+        var cubeGeometry = new THREE.BoxGeometry(3, 2, 0);
+        var cubeMaterial = new THREE.MeshNormalMaterial();
+
+        var cube1 = new THREE.Mesh(cubeGeometry, cubeMaterial);
+        scene.add(cube1);
+        //Position camera
+        cube1.position.x=4;
+        
+        camera.position.x = 0;
+        camera.position.y = -5;
+        camera.position.z = -5;
+        camera.lookAt(scene.position);
+
+        
+
+        render();
+      }
+
+      function render() {
+        renderer.render(scene, camera);
+        requestAnimationFrame(render);
+      }
+      //animate();
+    </script>
+  </body>
+</html>
